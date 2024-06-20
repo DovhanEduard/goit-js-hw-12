@@ -11,10 +11,9 @@ const loader = document.querySelector('.loader');
 const loadeMoreBtn = document.querySelector('.js-button');
 
 let page = 1;
-let perPage = 15;
+let perPage = 115;
 let searchValue;
-let prevSearchValue;
-
+let prevSearchValue = '';
 let isGalleryContainsItems = false;
 
 form.addEventListener('submit', onSearchImg);
@@ -51,7 +50,7 @@ async function onSearchImg(event) {
     const markup = data.hits.map(createImagesMarkup).join('');
 
     galleryElem.innerHTML = markup;
-    
+
     page++;
 
     gallery.refresh();
@@ -91,7 +90,6 @@ async function onClick(event) {
 
     const galleryItem = document.querySelector('.gallery-item');
     const scrollDistance = galleryItem.getBoundingClientRect().height * 2;
-    console.log(scrollDistance);
 
     window.scrollBy({
       top: scrollDistance,

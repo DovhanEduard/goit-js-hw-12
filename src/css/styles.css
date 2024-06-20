@@ -91,6 +91,7 @@ button:hover {
   flex-wrap: wrap;
   gap: 24px;
   width: 1200px;
+  margin-bottom: 30px;
 }
 
 .gallery-item {
@@ -162,5 +163,9 @@ button:hover {
 }
 
 .hidden {
+  display: none;
+}
+
+.btn-hidden{
   display: none;
 }

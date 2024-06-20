@@ -86,7 +86,13 @@ async function onClick(event) {
       });
     }
 
+    let gallery = new SimpleLightbox('.gallery a', {
+      captionsData: 'alt',
+      captionDelay: 250,
+    });
+
     galleryElem.insertAdjacentHTML('beforeend', markup);
+    gallery.refresh();
 
     const galleryItem = document.querySelector('.gallery-item');
     const scrollDistance = galleryItem.getBoundingClientRect().height * 2;

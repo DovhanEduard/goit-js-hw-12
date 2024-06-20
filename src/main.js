@@ -11,7 +11,7 @@ const loader = document.querySelector('.loader');
 const loadeMoreBtn = document.querySelector('.js-button');
 
 let page = 1;
-let perPage = 115;
+let perPage = 15;
 let searchValue;
 let prevSearchValue = '';
 let isGalleryContainsItems = false;

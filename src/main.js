@@ -76,15 +76,6 @@ async function onClick(event) {
   try {
     const data = await getImages(searchValue, page, perPage);
     const markup = data.hits.map(createImagesMarkup).join('');
-    const totalPages = Math.ceil(data.totalHits / perPage);
-
-    if (page > totalPages) {
-      return iziToast.error({
-        color: 'white',
-        position: 'topRight',
-        message: "We're sorry, but you've reached the end of search results.",
-      });
-    }
 
     let gallery = new SimpleLightbox('.gallery a', {
       captionsData: 'alt',
@@ -102,6 +93,17 @@ async function onClick(event) {
       left: 0,
       behavior: 'smooth',
     });
+
+    const totalPages = Math.ceil(data.totalHits / perPage);
+
+    if (page === totalPages) {
+      loadeMoreBtn.classList.add('btn-hidden');
+      return iziToast.error({
+        color: 'white',
+        position: 'topRight',
+        message: "We're sorry, but you've reached the end of search results.",
+      });
+    }
 
     page++;
   } catch (error) {

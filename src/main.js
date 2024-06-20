@@ -11,7 +11,7 @@ const loader = document.querySelector('.loader');
 const loadeMoreBtn = document.querySelector('.js-button');
 
 let page = 1;
-let perPage = 15;
+let perPage = 200;
 let searchValue;
 let prevSearchValue = '';
 let isGalleryContainsItems = false;
@@ -43,11 +43,14 @@ async function onSearchImg(event) {
     }
 
     const totalPages = Math.ceil(data.totalHits / perPage);
+    const isLastPage = page === totalPages;
 
-    if (page === totalPages) {
+    if (isLastPage) {
       loadeMoreBtn.classList.add('btn-hidden');
 
-      return iziToast.error({
+      hideLoader();
+
+      iziToast.error({
         color: 'white',
         position: 'topRight',
         message: "We're sorry, but you've reached the end of search results.",
@@ -65,6 +68,12 @@ async function onSearchImg(event) {
 
     page++;
 
+    isGalleryContainsItems = galleryElem.hasChildNodes();
+
+    if (isGalleryContainsItems && !isLastPage) {
+      loadeMoreBtn.classList.remove('btn-hidden');
+    }
+
     gallery.refresh();
   } catch (error) {
     iziToast.show({
@@ -74,13 +83,6 @@ async function onSearchImg(event) {
         'Sorry, there are no images matching your search query. Please try again!',
     });
   }
-
-  isGalleryContainsItems = galleryElem.hasChildNodes();
-
-  if (isGalleryContainsItems) {
-    loadeMoreBtn.classList.remove('btn-hidden');
-  }
-
   hideLoader();
 }
 
